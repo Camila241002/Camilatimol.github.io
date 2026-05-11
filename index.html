@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girly BSIS Website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffb6d9,#ffcce6,#ffd6f5);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+}
+
+.card{
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(10px);
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(255,105,180,0.3);
+    animation:fadeIn 1s ease;
+    border:2px solid #fff;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#ff4fa3;
+    font-size:32px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    margin:10px 0;
+    border-radius:15px;
+    border:none;
+    background:#fff0f7;
+    outline:none;
+    font-size:15px;
+}
+
+label{
+    color:#ff4fa3;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    border:none;
+    background:linear-gradient(90deg,#ff4fa3,#ff85c1);
+    color:white;
+    border-radius:15px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.profile-photo{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid #ff85c1;
+    display:block;
+    margin:0 auto 20px;
+    box-shadow:0 5px 20px rgba(255,105,180,0.4);
+}
+
+.info{
+    background:#fff0f7;
+    padding:15px;
+    border-radius:20px;
+    margin-top:15px;
+}
+
+.info p{
+    margin:10px 0;
+    color:#ff4fa3;
+    font-weight:500;
+}
+
+.hidden{
+    display:none;
+}
+
+.switch{
+    text-align:center;
+    margin-top:15px;
+    color:#ff4fa3;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- REGISTER -->
+    <div class="card" id="registerSection">
+
+        <h1>♡ Register ♡</h1>
+
+        <input type="text" id="fullname" placeholder="Full Name">
+        <input type="text" id="course" placeholder="Course">
+        <input type="date" id="birthdate">
+        <input type="text" id="address" placeholder="Address">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+
+        <label>Upload Photo</label>
+        <input type="file" id="photo">
+
+        <button onclick="register()">Register</button>
+
+        <div class="switch" onclick="showLogin()">
+            Already have account? Login
+        </div>
+
+    </div>
+
+    <!-- LOGIN -->
+    <div class="card hidden" id="loginSection">
+
+        <h1>♡ Login ♡</h1>
+
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <div class="switch" onclick="showRegister()">
+            No account? Register
+        </div>
+
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="card hidden" id="dashboardSection">
+
+        <img id="displayPhoto" class="profile-photo">
+
+        <h1 id="displayName"></h1>
+
+        <div class="info">
+            <p><strong>Course:</strong> <span id="displayCourse"></span></p>
+            <p><strong>Birthdate:</strong> <span id="displayBirthdate"></span></p>
+            <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+            <p><strong>Username:</strong> <span id="displayUsername"></span></p>
+        </div>
+
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
+</div>
+
+<script>
+
+function showLogin(){
+    document.getElementById("registerSection").classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+}
+
+function showRegister(){
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("registerSection").classList.remove("hidden");
+}
+
+function register(){
+
+    let fullname = document.getElementById("fullname").value;
+    let course = document.getElementById("course").value;
+    let birthdate = document.getElementById("birthdate").value;
+    let address = document.getElementById("address").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let photo = document.getElementById("photo").files[0];
+
+    let reader = new FileReader();
+
+    reader.onload = function(){
+
+        let user = {
+            fullname,
+            course,
+            birthdate,
+            address,
+            username,
+            password,
+            photo: reader.result
+        };
+
+        localStorage.setItem("user", JSON.stringify(user));
+
+        alert("Registration Successful!");
+
+        showLogin();
+    };
+
+    if(photo){
+        reader.readAsDataURL(photo);
+    }else{
+        alert("Please upload photo");
+    }
+}
+
+function login(){
+
+    let loginUsername = document.getElementById("loginUsername").value;
+    let loginPassword = document.getElementById("loginPassword").value;
+
+    let storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if(
+        storedUser &&
+        loginUsername === storedUser.username &&
+        loginPassword === storedUser.password
+    ){
+
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.remove("hidden");
+
+        document.getElementById("displayName").innerText = storedUser.fullname;
+        document.getElementById("displayCourse").innerText = storedUser.course;
+        document.getElementById("displayBirthdate").innerText = storedUser.birthdate;
+        document.getElementById("displayAddress").innerText = storedUser.address;
+        document.getElementById("displayUsername").innerText = storedUser.username;
+        document.getElementById("displayPhoto").src = storedUser.photo;
+
+    }else{
+        alert("Invalid Username or Password");
+    }
+}
+
+function logout(){
+
+    document.getElementById("dashboardSection").classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+          </html>
