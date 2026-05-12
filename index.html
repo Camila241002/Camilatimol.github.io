@@ -3,281 +3,406 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> My Personal information </title>
+<title>Girly Student Portal</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#ffb6d9,#ffcce6,#ffd6f5);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+background:linear-gradient(to right,#ede9fe,#f5f3ff);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-.container{
-    width:100%;
-    max-width:420px;
+/* FORM BOX */
+.box{
+width:100%;
+max-width:380px;
+background:white;
+padding:30px;
+border-radius:30px;
+box-shadow:0 0 20px rgba(124,58,237,0.2);
 }
 
-.card{
-    background:rgba(255,255,255,0.85);
-    backdrop-filter:blur(10px);
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(255,105,180,0.3);
-    animation:fadeIn 1s ease;
-    border:2px solid #fff;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:20px;
-    color:#ff4fa3;
-    font-size:32px;
+.title{
+text-align:center;
+font-size:42px;
+color:#7c3aed;
+margin-bottom:20px;
+font-family:cursive;
 }
 
 input{
-    width:100%;
-    padding:13px;
-    margin:10px 0;
-    border-radius:15px;
-    border:none;
-    background:#fff0f7;
-    outline:none;
-    font-size:15px;
+width:100%;
+padding:14px;
+margin:8px 0;
+border:none;
+border-radius:15px;
+background:#f5f3ff;
+font-size:16px;
+outline:none;
 }
 
 label{
-    color:#ff4fa3;
-    font-weight:bold;
+color:#7c3aed;
+font-weight:bold;
 }
 
 button{
-    width:100%;
-    padding:13px;
-    border:none;
-    background:linear-gradient(90deg,#ff4fa3,#ff85c1);
-    color:white;
-    border-radius:15px;
-    cursor:pointer;
-    transition:0.3s;
-    margin-top:10px;
-    font-size:16px;
-    font-weight:bold;
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:linear-gradient(to right,#7c3aed,#a78bfa);
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
 button:hover{
-    transform:scale(1.03);
+opacity:0.9;
 }
 
-.profile-photo{
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    object-fit:cover;
-    border:6px solid #ff85c1;
-    display:block;
-    margin:0 auto 20px;
-    box-shadow:0 5px 20px rgba(255,105,180,0.4);
+.link{
+margin-top:15px;
+text-align:center;
+color:#7c3aed;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* DASHBOARD */
+.dashboard{
+display:none;
+width:100%;
+max-width:900px;
+background:white;
+padding:30px;
+border-radius:30px;
+box-shadow:0 0 20px rgba(124,58,237,0.2);
+}
+
+.dashboard-title{
+text-align:center;
+font-size:55px;
+color:#7c3aed;
+font-family:cursive;
+margin-bottom:20px;
+}
+
+.profile{
+text-align:center;
+}
+
+.profile img{
+width:170px;
+height:170px;
+border-radius:50%;
+border:6px solid #c4b5fd;
+object-fit:cover;
+}
+
+.welcome{
+font-size:30px;
+margin-top:15px;
+color:#5b21b6;
+}
+
+.card{
+margin-top:25px;
+background:#faf5ff;
+padding:25px;
+border-radius:20px;
 }
 
 .info{
-    background:#fff0f7;
-    padding:15px;
-    border-radius:20px;
-    margin-top:15px;
+display:flex;
+justify-content:space-between;
+padding:14px 0;
+border-bottom:1px solid #ddd6fe;
+font-size:18px;
 }
 
-.info p{
-    margin:10px 0;
-    color:#ff4fa3;
-    font-weight:500;
+.info:last-child{
+border-bottom:none;
 }
 
-.hidden{
-    display:none;
+.label{
+font-weight:bold;
+color:#7c3aed;
 }
 
-.switch{
-    text-align:center;
-    margin-top:15px;
-    color:#ff4fa3;
-    cursor:pointer;
-    font-weight:bold;
+.quote{
+margin-top:20px;
+background:#ede9fe;
+padding:20px;
+border-radius:15px;
+text-align:center;
+font-size:18px;
+color:#5b21b6;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.logout-btn{
+margin-top:25px;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- REGISTER -->
+<div class="box" id="registerBox">
 
-    <!-- REGISTER -->
-    <div class="card" id="registerSection">
+<h1 class="title">💜 Register 💜</h1>
 
-        <h1>♡ Register ♡</h1>
+<input type="text" id="fullname" placeholder="Full Name">
 
-        <input type="text" id="fullname" placeholder="Full Name">
-        <input type="text" id="course" placeholder="Course">
-        <input type="text" id="age" placeholder ="Age">
-        <input type="date" id="birthdate">
-        <input type="text" id="address" placeholder="Address">
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
+<input type="text" id="course" placeholder="Course">
 
-        <label>Upload Photo</label>
-        <input type="file" id="photo">
+<input type="number" id="age" placeholder="Age">
 
-        <button onclick="register()">Register</button>
+<input type="date" id="birthday">
 
-        <div class="switch" onclick="showLogin()">
-            Already have account? Login
-        </div>
+<input type="text" id="address" placeholder="Address">
 
-    </div>
+<input type="text" id="username" placeholder="Username">
 
-    <!-- LOGIN -->
-    <div class="card hidden" id="loginSection">
+<input type="password" id="password" placeholder="Password">
 
-        <h1>♡ Student Dashboard ♡</h1>
+<label>Upload Profile Photo</label>
+<input type="file" id="photo">
 
-        <input type="text" id="loginUsername" placeholder="Username">
-        <input type="password" id="loginPassword" placeholder="Password">
+<button onclick="register()">Create Account</button>
 
-        <button onclick="login()">Login</button>
+<div class="link" onclick="showLogin()">
+Already have an account? Login
+</div>
 
-        <div class="switch" onclick="showRegister()">
-            No account? Register
-        </div>
+</div>
 
-    </div>
+<!-- LOGIN -->
+<div class="box" id="loginBox" style="display:none;">
 
-    <!-- DASHBOARD -->
-    <div class="card hidden" id="dashboardSection">
+<h1 class="title">💜 Login 💜</h1>
 
-        <img id="displayPhoto" class="profile-photo">
+<input type="text" id="loginUser" placeholder="Username">
 
-        <h1 id="displayName"></h1>
+<input type="password" id="loginPass" placeholder="Password">
 
-        <div class="info">
-            <p><strong>Course:</strong> <span id="displayCourse"></span></p>
-            <p></strong>Age:</strong> <span id="displayAge"></span></p>
-            <p><strong>Birthdate:</strong> <span id="displayBirthdate"></span></p>
-            <p><strong>Address:</strong> <span id="displayAddress"></span></p>
-            <p><strong>Username:</strong> <span id="displayUsername"></span></p>
-        </div>
+<button onclick="login()">Login</button>
 
-        <button onclick="logout()">Logout</button>
+<div class="link" onclick="showRegister()">
+Create New Account
+</div>
 
-    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+<h1 class="dashboard-title">🌸 Dashboard 🌸</h1>
+
+<div class="profile">
+
+<img id="displayPhoto"
+src="https://i.imgur.com/BoN9kdC.png">
+
+<h2 class="welcome">
+Welcome, <span id="displayName"></span> 💖
+</h2>
+
+</div>
+
+<div class="card">
+
+<div class="info">
+<span class="label">Full Name</span>
+<span id="displayFullname"></span>
+</div>
+
+<div class="info">
+<span class="label">Course</span>
+<span id="displayCourse"></span>
+</div>
+
+<div class="info">
+<span class="label">Age</span>
+<span id="displayAge"></span>
+</div>
+
+<div class="info">
+<span class="label">Birthday</span>
+<span id="displayBirthday"></span>
+</div>
+
+<div class="info">
+<span class="label">Address</span>
+<span id="displayAddress"></span>
+</div>
+
+<div class="info">
+<span class="label">Username</span>
+<span id="displayUsername"></span>
+</div>
+
+</div>
+
+<div class="quote">
+💕 Believe in yourself and never stop chasing your dreams ✨
+</div>
+
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
 
 </div>
 
 <script>
 
+/* SHOW LOGIN */
 function showLogin(){
-    document.getElementById("registerSection").classList.add("hidden");
-    document.getElementById("loginSection").classList.remove("hidden");
+document.getElementById("registerBox").style.display="none";
+document.getElementById("loginBox").style.display="block";
 }
 
+/* SHOW REGISTER */
 function showRegister(){
-    document.getElementById("loginSection").classList.add("hidden");
-    document.getElementById("registerSection").classList.remove("hidden");
+document.getElementById("registerBox").style.display="block";
+document.getElementById("loginBox").style.display="none";
 }
 
+/* REGISTER */
 function register(){
 
-    let fullname = document.getElementById("fullname").value;
-    let course = document.getElementById("course").value;
-    let age = document.getElementById("age").value;
-    let birthdate = document.getElementById("birthdate").value;
-    let address = document.getElementById("address").value;
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+let fullname=document.getElementById("fullname").value;
+let course=document.getElementById("course").value;
+let age=document.getElementById("age").value;
+let birthday=document.getElementById("birthday").value;
+let address=document.getElementById("address").value;
+let username=document.getElementById("username").value;
+let password=document.getElementById("password").value;
 
-    let photo = document.getElementById("photo").files[0];
-
-    let reader = new FileReader();
-
-    reader.onload = function(){
-
-        let user = {
-            fullname,
-            course,
-            Age,
-            birthdate,
-            address,
-            username            password           photo: reader.result
-        };
-
-        localStorage.setItem("user", JSON.stringify(user));
-
-        alert("Registration Successful!");
-
-        showLogin();
-    };
-
-    if(photo){
-        reader.readAsDataURL(photo);
-    }else{
-        alert("Please upload photo");
-    }
+if(
+fullname==="" ||
+course==="" ||
+age==="" ||
+birthday==="" ||
+address==="" ||
+username==="" ||
+password===""){
+alert("Please fill all fields!");
+return;
 }
 
+/* SAVE INFO */
+localStorage.setItem("fullname",fullname);
+localStorage.setItem("course",course);
+localStorage.setItem("age",age);
+localStorage.setItem("birthday",birthday);
+localStorage.setItem("address",address);
+localStorage.setItem("username",username);
+localStorage.setItem("password",password);
+
+/* SAVE PHOTO */
+let file=document.getElementById("photo").files[0];
+
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+localStorage.setItem("photo",e.target.result);
+
+alert("Account Created Successfully!");
+
+showLogin();
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+alert("Account Created Successfully!");
+
+showLogin();
+
+}
+
+}
+
+/* LOGIN */
 function login(){
 
-    let loginUsername = document.getElementById("loginUsername").value;
-    let loginPassword = document.getElementById("loginPassword").value;
+let user=document.getElementById("loginUser").value;
+let pass=document.getElementById("loginPass").value;
 
-    let storedUser = JSON.parse(localStorage.getItem("user"));
+let savedUser=localStorage.getItem("username");
+let savedPass=localStorage.getItem("password");
 
-    if(
-        storedUser &&
-        loginUsername === storedUser.username &&
-        loginPassword === storedUser.password
-    ){
+if(user===savedUser && pass===savedPass){
 
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("dashboardSection").classList.remove("hidden")
-        document.getElementById("displayName").innerText = storedUser.fullname;
-        document.getElementById("displayCourse").innerText = storedUser.course;
-        document.getElementById("displayAge").innerText = storedUser.age
-        document.getElementById("displayBirthdate").innerText = storedUser.birthdate;
-        document.getElementById("displayAddress").innerText = storedUser.address;
-        document.getElementById("displayUsername").innerText = storedUser.username;
-        document.getElementById("displayPhoto").src = storedUser.photo;
+document.getElementById("loginBox").style.display="none";
+document.getElementById("dashboard").style.display="block";
 
-    }else{
-        alert("Invalid Username or Password");
-    }
+/* DISPLAY INFO */
+document.getElementById("displayName").innerText=
+localStorage.getItem("fullname");
+
+document.getElementById("displayFullname").innerText=
+localStorage.getItem("fullname");
+
+document.getElementById("displayCourse").innerText=
+localStorage.getItem("course");
+
+document.getElementById("displayAge").innerText=
+localStorage.getItem("age");
+
+document.getElementById("displayBirthday").innerText=
+localStorage.getItem("birthday");
+
+document.getElementById("displayAddress").innerText=
+localStorage.getItem("address");
+
+document.getElementById("displayUsername").innerText=
+localStorage.getItem("username");
+
+/* DISPLAY PHOTO */
+let savedPhoto=localStorage.getItem("photo");
+
+if(savedPhoto){
+document.getElementById("displayPhoto").src=savedPhoto;
 }
 
+}else{
+alert("Wrong Username or Password!");
+}
+
+}
+
+/* LOGOUT */
 function logout(){
 
-    document.getElementById("dashboardSection").classList.add("hidden");
-    document.getElementById("loginSection").classList.remove("hidden");
+document.getElementById("dashboard").style.display="none";
+
+document.getElementById("loginBox").style.display="block";
+
 }
 
 </script>
 
 </body>
-          </html>
+</html>
