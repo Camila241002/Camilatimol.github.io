@@ -208,6 +208,7 @@ function register(){
 
     let fullname = document.getElementById("fullname").value;
     let course = document.getElementById("course").value;
+    let age = document.getElementById("age").value;
     let birthdate = document.getElementById("birthdate").value;
     let address = document.getElementById("address").value;
     let username = document.getElementById("username").value;
@@ -222,11 +223,10 @@ function register(){
         let user = {
             fullname,
             course,
+            Age,
             birthdate,
             address,
-            username,
-            password,
-            photo: reader.result
+            username            password           photo: reader.result
         };
 
         localStorage.setItem("user", JSON.stringify(user));
@@ -257,10 +257,10 @@ function login(){
     ){
 
         document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("dashboardSection").classList.remove("hidden");
-
+        document.getElementById("dashboardSection").classList.remove("hidden")
         document.getElementById("displayName").innerText = storedUser.fullname;
         document.getElementById("displayCourse").innerText = storedUser.course;
+        document.getElementById("displayAge").innerText = storedUser.age
         document.getElementById("displayBirthdate").innerText = storedUser.birthdate;
         document.getElementById("displayAddress").innerText = storedUser.address;
         document.getElementById("displayUsername").innerText = storedUser.username;
